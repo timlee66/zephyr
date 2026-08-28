@@ -26,11 +26,20 @@
 				irq-prio   = <2>;
 				group-mask = <0x04>;
 			};
+			/*
+			 * Disable group D0 interrupt (INT43). The NVIC still holds a
+			 * stale pending flag for it out of reset, and connecting the
+			 * group re-enables that interrupt, which stalls the boot when
+			 * the kernel unlocks interrupts to switch to the main thread.
+			 * Nothing enabled on this board uses wake-up inputs GPIO30-37.
+			 */
+			/*
 			group_d0: group-d0-map {
 				irq        = <43>;
 				irq-prio   = <2>;
 				group-mask = <0x08>;
 			};
+			*/
 			group_e0: group-e0-map {
 				irq        = <44>;
 				irq-prio   = <2>;
